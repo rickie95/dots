@@ -1,11 +1,11 @@
-#! /bin/sh 
+#! /bin/sh -x 
 
 # Installs required packages
 
 echo "Installing packages"
 
 pacman -Syu
-pacman -S bspwm polybar sxhkd rofi mpd nnmpdc feh zathura vmcodium --noconfirm
+yay -S bspwm polybar sxhkd rofi ranger mpd nnmpdc feh zathura vscodium-bin picom siji-git -nodiffmenu --noeditmenu
 
 # Creates dedicated folder
 
@@ -17,22 +17,23 @@ mkdir ~/.config/polybar
 
 # Creates symlink from repo's dots to new folders
 
-ln -s bspwm/bspwmrc ~/.config/bspwm/
-ln -s sxhkd/sxhkdrc ~/.config/sxhkd/
-ln -s polybar/config ~/.config/polybar/
+ln -s ~/git/dots/bspwm/bspwmrc ~/.config/bspwm/
+ln -s ~/git/dots/sxhkd/sxhkdrc ~/.config/sxhkd/
+ln -s ~/git/dots/polybar/config ~/.config/polybar/
+
+# Enables syntax highlighting for nano
+
+echo "include /usr/share/nano/*.nanorc" >> ~/.nanorc
+
 
 # Retrives some useful repos
 
-mkdir ~/git
-
-echo "Installing scroll"
-mkdir ~/git/scroll
+echo "\n\nInstalling scroll...\n"
 git clone http://www.github.com/rickie95/personal-scroll ~/git/scroll
 cd ~/git/scroll
 sudo make clean install
 
-echo "Installing st..."
-mkdir ~/git/st
+echo "\n\nInstalling st...\n"
 git clone http://www.github.com/rickie95/personal-st ~/git/st
 cd ~/git/st
 sudo make clean install
