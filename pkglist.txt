@@ -1,0 +1,8 @@
+bspwm
+sxhkd
+polybar
+zathura
+rofi
+mpd
+nnmpdc
+feh

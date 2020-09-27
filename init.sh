@@ -1,14 +1,14 @@
 #! /bin/sh 
 
+# Enable all syntax definitions for nano editor
+echo 'include "/usr/share/nano/*.nanorc"' >> /home/$USER/.nanorc
+
 # Installs required packages
-
 echo "Installing packages"
-
 pacman -Syu
-pacman -S bspwm polybar sxhkd rofi mpd nnmpdc feh zathura vmcodium --noconfirm
+pacman -S --needed - < pkglist.txt 
 
-# Creates dedicated folder
-
+# Creates dedicated folders
 echo "Coping configs.."
 
 mkdir ~/.config/bspwm
@@ -17,9 +17,9 @@ mkdir ~/.config/polybar
 
 # Creates symlink from repo's dots to new folders
 
-ln -s bspwm/bspwmrc ~/.config/bspwm/
-ln -s sxhkd/sxhkdrc ~/.config/sxhkd/
-ln -s polybar/config ~/.config/polybar/
+ln -s dots/bspwm.config ~/.config/bspwm/
+ln -s dots/sxhkd.config ~/.config/sxhkd/
+ln -s dots/polybar.config ~/.config/polybar/
 
 # Retrives some useful repos
 
