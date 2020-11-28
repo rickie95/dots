@@ -2,17 +2,37 @@
 # SKHD Key Bindings
 # 
 
-# Terminal emulator
+# Terminal emulator with TMux 
 super + Return
-	st
+	st -e tmux
 
 # Rofi
 super + space
 	rofi -show run
 
+# Ranger 
+super + r
+	st -e ranger
+
 # sxhkd reload config file
 super + Escape
 	pkill -USR1 -x sxhkd
+
+# Thunar file manager
+super + e
+	thunar
+
+# Open OrgMode in Emacs
+super + o
+	st -e emacs -nw --file ~/orgmode.org
+
+# Betterlockscreen lock
+alt + shift + l
+    betterlockscreen -l dim
+
+########################
+######## BSPWM #########
+########################
 
 # Exit and restart bspwm
 super + alt + {q,r}
@@ -30,15 +50,21 @@ super + {comma,period}
 super + shift + {comma,period}
 	bspc desktop -f {prev,next}
 
+# Switch floating / tiled for focused window
+super + p
+	bspc node -t floating
 # Switch to {1-9} desktop
-#super + {1-9}
-#        bspc desktop -f ^{1-9}
+super + {1-9}
+        bspc desktop -f ^{1-9}
 
 # Move focused node to {1-3} desktop and switch to that desktop
 super + shift + {1-9}
 	id=$(bspc query -N -n); bspc node -d ^{1-9}; bspc node -f ${id}
 
-
 # Fn keys since acpi is just horrible
+#XF86Audio{RaiseVolume,LowerVolume,Mute}
+#	amixer set Master {5%+,5%-,toggle}
+
 XF86Audio{RaiseVolume,LowerVolume,Mute}
-	amixer set Master {5%+,5%-,toggle}
+	pulseaudio-ctl {up,down,mute}
+

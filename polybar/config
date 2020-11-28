@@ -57,7 +57,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm xwindow
-modules-center = mpd 
+modules-center = date 
 modules-right = pulseaudio memory cpu wlan eth battery temperature powermenu
 
 tray-position = right
@@ -95,6 +95,7 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
+
 modules-left = bspwm xwindow
 modules-center = date
 modules-right = pulseaudio memory cpu wlan eth battery temperature powermenu
@@ -106,8 +107,11 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-; ==== Modules ======
 
+;;;;;;;;;;;;;;;;;;;;;;
+;;;;;; MODULES ;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;
+;
 [module/title]
 type = internal/xwindow
 
@@ -123,12 +127,6 @@ label = %title:0:50:...%
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
 
 label-song-maxlen = 70
 label-song-ellipsis = true
@@ -186,6 +184,10 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #ff5722
 label = %percentage:2%%
 
+;;;;;;;;;;;;;;;
+;;; MEMORY ;;;;
+;;;;;;;;;;;;;;;
+
 [module/memory]
 type = internal/memory
 interval = 2
@@ -193,6 +195,10 @@ format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
+
+;;;;;;;;;;;;;;;;;
+;;;;; WLAN ;;;;;;
+;;;;;;;;;;;;;;;;;
 
 [module/wlan]
 type = internal/network
@@ -203,11 +209,7 @@ format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
 label-connected = %essid%
 
-;format-disconnected =
 format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -218,23 +220,26 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 right-click = kcmshell5 kcm_networkmanagement
 
+;;;;;;;;;;;;;;;;;;;;;
+;;;;;; ETHERNET ;;;;;
+;;;;;;;;;;;;;;;;;;;;;
+
+
 [module/eth]
 type = internal/network
-interface = enp0s20f0u1
+interface = enp5s0
 interval = 3.0
-
 format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
-
 format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
 right-click = kcmshell5 kcm_networkmanagement
+
+;;;;;;;;;;;;;;;;;;;;
+;;;;;;; DATE ;;;;;;;
+;;;;;;;;;;;;;;;;;;;;
+
 [module/date]
 type = internal/date
 interval = 5
@@ -323,9 +328,7 @@ ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
 type = custom/menu
-
 expand-right = true
-
 format-spacing = 1
 
 label-open = 
@@ -352,11 +355,11 @@ menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
+compositing-background = xor
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-;pseudo-transparency = false
+pseudo-transparency = false
 
 [global/wm]
 margin-top = 5

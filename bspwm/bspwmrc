@@ -1,11 +1,9 @@
-#! /bin/dash -x
+#! /bin/sh -x
 
-# Screen names
-LAPTOP_SCREEN=eDP1
-EXTERNAL_HDMI=HDMI2
-EXTERNAL_DP=DP1
+########################
+#####   VARIABLES  #####
+########################
 
-# BSPWM parameters
 BORDER_WIDTH=3
 BORDER_COLOR="#ff910e"
 WINDOW_GAP=5
@@ -17,34 +15,23 @@ D=0
 X_OFFSET=0
 
 sxhkd &
+compton &
 
-feh --bg-scale /home/riccardo/Pictures/forest.jpg
+feh --bg-scale /home/riccardo/Immagini/clouds.jpeg
 
 # Clean up: removes istances of polybar + bspwm
 killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
+
 for monitor in $(bspc query -M --names)
 do
     bspc monitor $monitor -r
 done
 
-XRANDR=$(xrandr --listactivemonitors)
+# Start BSPWM and Polybar
 
-if [ $(echo $XRANDR | grep -o *$LAPTOP_SCREEN ) = *$LAPTOP_SCREEN ] ; then
-	bspc monitor $LAPTOP_SCREEN -g 1366x768+0+0 -d $(($D+1)) $(($D+2)) $(($D+3))
-	MONITOR=$LAPTOP_SCREEN polybar -r main &
-	D=3
-fi
-
-#Check if external screen on HDMI2 is enabled
-if [  $(echo $XRANDR | grep -o *$EXTERNAL_HDMI ) = *$EXTERNAL_HDMI ] ; then
-	# If laptop screen is also on put, external screen to the right
-	if [ $D = 3 ] ; then
-		X_OFFSET=1366 
-	fi
-	bspc monitor $EXTERNAL_HDMI -g 1920x1080+$X_OFFSET+0 -d $(($D+1)) $(($D+2)) $(($D+3))
-	MONITOR=$EXTERNAL_HDMI polybar -r external-monitor &
-fi
+bspc monitor -d 1 2 3 4 5 6 7 8 9
+polybar -r main &
 
 ##########################
 #####     CONFIG    ######
@@ -61,13 +48,9 @@ bspc config gapless_monocle		$GAPLESS_MONOCLE
 #####     RULES      #####
 ##########################
 
-bspc rule -a Firefox desktop='^1'
 bspc rule -a Zathura state=tiled
 for side in top right bottom left ; do
 	bspc config ${side}_padding $BORDER_WIDTH
 done
 
-compton &
-devilspie &
 #redshift -l 43.94:11.47
-#clight
