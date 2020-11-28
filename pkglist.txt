@@ -1,0 +1,8 @@
+bspwm
+sxhkd
+polybar
+zathura
+rofi
+feh
+ranger
+tmux

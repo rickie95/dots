@@ -1,14 +1,14 @@
 #! /bin/sh -x 
 
+# Enable all syntax definitions for nano editor
+echo 'include "/usr/share/nano/*.nanorc"' >> /home/$USER/.nanorc
+
 # Installs required packages
-
 echo "Installing packages"
-
 pacman -Syu
-yay -S bspwm polybar sxhkd rofi zathura siji-git -nodiffmenu --noeditmenu
+pacman -S --needed - < pkglist.txt 
 
-# Creates dedicated folder
-
+# Creates dedicated folders
 echo "Coping configs.."
 
 mkdir ~/.config/bspwm
@@ -20,7 +20,3 @@ mkdir ~/.config/polybar
 ln -s bspwm/bspwmrc ~/.config/bspwm/
 ln -s sxhkd/sxhkdrc ~/.config/sxhkd/
 ln -s polybar/config ~/.config/polybar/
-
-# Enables syntax highlighting for nano
-
-echo "include /usr/share/nano/*.nanorc" >> ~/.nanorc
