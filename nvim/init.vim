@@ -1,3 +1,8 @@
+call plug#begin()
+    Plug 'preservim/nerdtree'
+call plug#end()
+
+
 syntax on
 
 set title
@@ -33,3 +38,8 @@ au FileType html setl ofu=htmlComplete#CompleteTags
 au FileType c,cpp setl ofu=ccomplete#CompleteCpp
 au FileType css setl ofu=csscomplete#CompleteCSS
 au FileType py setl ofu=pythoncomplete#CompletePython
+
+" Starts NERDTree
+autocmd VimEnter * NERDTree
+" Exit Vim if NERDTree is the only window left
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
